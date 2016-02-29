@@ -1,5 +1,5 @@
 class Shuffle1 {
-	public static void main(String args[]) {
+	public static void main(String[] args) {
 		int x = 3;
 		while (x > 0) {
 			if (x > 2) {
@@ -15,6 +15,5 @@ class Shuffle1 {
 				x = x - 1;
 			}
 		}
-		System.out.println();
 	}
 }
