@@ -1,0 +1,317 @@
+GIS Program - Dong Nan(nandong@vt.edu)
+
+dbFile:    db.txt
+script:    Script07.txt
+log:       Log07.txt
+Start time: Thu, 16 Apr 2015 17:29:58
+Quadtree children are printed in the order SW  SE  NE  NW
+--------------------------------------------------------------------------------
+; Script 7
+;
+; Test of searches and the buffer pool with another large database file.
+;
+; Specify boundaries of coordinate space:
+world	1100000W	1020000W	303000N	383000N
+
+Latitude/longitude values in index entries are shown as signed integers, in total seconds.
+
+World boundaries are set to:
+              138600
+   -396000                -367200
+              109800
+--------------------------------------------------------------------------------
+;
+; Import a large DB file:
+Command 1: import	NM_All.txt
+
+Imported Features by name: 48417
+Longest probe sequence:    32
+Imported Locations:        48417
+--------------------------------------------------------------------------------
+;
+; Check the location and name/state indices if you dare:
+;debug	quad
+;debug	hash
+;
+; Try a few name/state searches:
+Command 2: what_is	Clines Corners	NM
+
+1806688:  Torrance  350034N  1054009W
+--------------------------------------------------------------------------------
+Command 3: what_is	11476 Water Well	NM
+
+6650183:  Roosevelt  334935N  1030446W
+--------------------------------------------------------------------------------
+Command 4: what_is	Trinity Site	NM
+
+2339562:  Socorro  334038N  1062831W
+--------------------------------------------------------------------------------
+Command 5: what_is	Brazos Cliffs	NM
+
+204985:  Rio Arriba  364458N  1062337W
+--------------------------------------------------------------------------------
+Command 6: what_is	Tierra Amarilla	NM
+
+5113591:  Rio Arriba  364201N  1063259W
+--------------------------------------------------------------------------------
+Command 7: what_is	Truth or Consequences	NM
+
+1646307:  Sierra  330742N  1071510W
+--------------------------------------------------------------------------------
+;
+; Let's see what the buffer pool looks like now:
+Command 8: debug	pool
+
+MRU
+ 1646307:  897496|Truth or Consequences|Populated Place|NM|35|Sierra|051|330742N|1071510W|33.1284047|-107.2528069|||||1294|4245|Cuchillo|11/13/1980|03/21/2008
+ 5113591:  923704|Tierra Amarilla|Populated Place|NM|35|Rio Arriba|039|364201N|1063259W|36.7002922|-106.5497566|||||2295|7529|Tierra Amarilla|11/13/1980|01/29/2011
+ 204985:  886720|Brazos Cliffs|Cliff|NM|35|Rio Arriba|039|364458N|1062337W|36.7494587|-106.393641|||||2991|9813|Penasco Amarillo|11/13/1980|
+ 2339562:  902746|Trinity Site|Locale|NM|35|Socorro|053|334038N|1062831W|33.6772929|-106.4752871|||||1500|4921|Trinity Site|01/01/1993|
+ 6650183:  936263|11476 Water Well|Well|NM|35|Roosevelt|041|334935N|1030446W|33.8264821|-103.0793885|||||1209|3966|Lingo|09/01/1994|
+ 1806688:  898646|Clines Corners|Populated Place|NM|35|Torrance|057|350034N|1054009W|35.0094982|-105.6691804|||||2151|7057|Clines Corners|11/13/1980|
+LRU
+--------------------------------------------------------------------------------
+;
+; Try a few location searches:
+Command 9: what_is_at	364201N	1063259W
+
+   The following features were found at 364201N   1063259W
+4677381:  Santo Nino Church  Rio Arriba  NM
+5113591:  Tierra Amarilla  Rio Arriba  NM
+6117254:  Tierra Amarilla Historical Marker  Rio Arriba  NM
+6119531:  Fort Lowell Historical Marker  Rio Arriba  NM
+6212975:  Tierra Amarilla Weather Station  Rio Arriba  NM
+6360167:  La Clinica Del Pueblo De Rio Arriba, Inc.  Rio Arriba  NM
+6386937:  Tierra Amarilla Elementary School  Rio Arriba  NM
+6387089:  Tierra Amarilla Middle School  Rio Arriba  NM
+6387237:  Escallante High School  Rio Arriba  NM
+6590422:  Tierra Amarilla Historic District  Rio Arriba  NM
+6593537:  Tierra Amarilla Community Ditch  Rio Arriba  NM
+6888038:  Tierra Amarilla Post Office  Rio Arriba  NM
+--------------------------------------------------------------------------------
+;
+; And let's check the pool again; at this point, you might have some records
+; in a different order than I'm showing:
+Command 10: debug	pool
+
+MRU
+ 6888038:  938095|Tierra Amarilla Post Office|Post Office|NM|35|Rio Arriba|039|364201N|1063259W|36.7002922|-106.5497566|||||2295|7529|Tierra Amarilla|08/01/1993|
+ 6593537:  935798|Tierra Amarilla Community Ditch|Canal|NM|35|Rio Arriba|039|364201N|1063259W|36.7002922|-106.5497566|||||2295|7529|Tierra Amarilla|09/01/1994|
+ 6590422:  935767|Tierra Amarilla Historic District|Locale|NM|35|Rio Arriba|039|364201N|1063259W|36.7002922|-106.5497566|||||2295|7529|Tierra Amarilla|09/01/1994|
+ 6387237:  934141|Escallante High School|School|NM|35|Rio Arriba|039|364201N|1063259W|36.7002922|-106.5497566|||||2295|7529|Tierra Amarilla|09/01/1992|
+ 6387089:  934140|Tierra Amarilla Middle School|School|NM|35|Rio Arriba|039|364201N|1063259W|36.7002922|-106.5497566|||||2295|7529|Tierra Amarilla|09/01/1992|
+ 6386937:  934139|Tierra Amarilla Elementary School|School|NM|35|Rio Arriba|039|364201N|1063259W|36.7002922|-106.5497566|||||2295|7529|Tierra Amarilla|09/01/1992|
+ 6360167:  933928|La Clinica Del Pueblo De Rio Arriba, Inc.|Hospital|NM|35|Rio Arriba|039|364201N|1063259W|36.7002922|-106.5497566|||||2295|7529|Tierra Amarilla|09/01/1992|
+ 6212975:  932548|Tierra Amarilla Weather Station|Locale|NM|35|Rio Arriba|039|364201N|1063259W|36.7002922|-106.5497566|||||2295|7529|Tierra Amarilla|05/01/1994|
+ 6119531:  931713|Fort Lowell Historical Marker|Park|NM|35|Rio Arriba|039|364201N|1063259W|36.7002922|-106.5497566|||||2295|7529|Tierra Amarilla|05/01/1994|
+ 6117254:  931697|Tierra Amarilla Historical Marker|Park|NM|35|Rio Arriba|039|364201N|1063259W|36.7002922|-106.5497566|||||2295|7529|Tierra Amarilla|05/01/1994|
+LRU
+--------------------------------------------------------------------------------
+;
+Command 11: what_is_at	351018N	1034330W
+
+   The following features were found at 351018N   1034330W
+2187260:  Tucumcari Area vocational School  Quay  NM
+2235841:  First Baptist Church  Quay  NM
+2235967:  First Christian Church  Quay  NM
+2236095:  First Presbyterian Church  Quay  NM
+2237607:  Full Gospel Grace Tabernacle  Quay  NM
+2237741:  First Spanish Baptist Church  Quay  NM
+2237875:  First Assembly of God Church  Quay  NM
+2249040:  Church of God  Quay  NM
+2254942:  The Church of Jesus Christ of Latter Day Saints  Quay  NM
+2296846:  Temple Baptist  Quay  NM
+2296966:  Trinity Baptist Church  Quay  NM
+2297094:  Primitive Baptist Church  Quay  NM
+2297224:  Bethel Tabernacle  Quay  NM
+2298962:  Church of the Nazarene  Quay  NM
+2299090:  Church of Christ Scientist  Quay  NM
+2299222:  Church of Christ  Quay  NM
+2303408:  Saint Michael Episcopal Church  Quay  NM
+2305117:  Center Saint United Methodist Church  Quay  NM
+2305259:  Mount Calvary Baptist Church  Quay  NM
+2333331:  Seventh Day Adventist Church  Quay  NM
+2333465:  Saint Annes Catholic Church  Quay  NM
+3993703:  Tucumcari High School  Quay  NM
+4150618:  Tucumcari  Quay  NM
+4667008:  United Pentecostal Church  Quay  NM
+4669414:  Kingdom Hall  Quay  NM
+4685821:  Christian Science Services Church  Quay  NM
+4692138:  First Church of the Nazarene  Quay  NM
+4810079:  Rayo Del Luz Baptist Church  Quay  NM
+5818212:  Rural Bookmobile East Library  Quay  NM
+5834107:  Tucumcari Area Vocational School Library  Quay  NM
+5842886:  Tucumcari Historical Research Institute  Quay  NM
+6206442:  Tucumcari Historical Marker  Quay  NM
+6297369:  Baca-Goodman House Historic Site  Quay  NM
+6376428:  Temple Baptist Academy  Quay  NM
+6400024:  Tucumcari Junior High School  Quay  NM
+6408201:  Rock Island-Southern Pacific Passenger Depot Historic Site  Quay  NM
+6415483:  Quay County Courthouse Historic Site  Quay  NM
+6814402:  Tucumcari Post Office  Quay  NM
+--------------------------------------------------------------------------------
+Command 12: what_is_at	354929N	1055845W
+
+   The following features were found at 354929N   1055845W
+2556144:  Camel Rock  Santa Fe  NM
+--------------------------------------------------------------------------------
+Command 13: what_is_at	360337N	1075801W
+
+   The following features were found at 360337N   1075801W
+295925:  Chaco Canyon  San Juan  NM
+--------------------------------------------------------------------------------
+;
+; And a few region searches, some with modifiers:
+Command 14: what_is_in	364201N	1063259W	60	60
+
+   The following 20 features were found in (364201N +/- 60, 1063259W +/- 60)
+7478738:  Tierra Amarilla Census Designated Place  NM  364221N  1063354W
+7228814:  Tierra Amarilla Division  NM  364113N  1063324W
+1562105:  La Canada Ditch  NM  364249N  1063250W
+7502044:  La Clinica Emergency Medical Services  NM  364242N  1063344W
+7542267:  Tierra Amarilla Volunteer Fire Department  NM  364238N  1063331W
+1401658:  Tierra Amarilla Ditch  NM  364148N  1063251W
+4677381:  Santo Nino Church  NM  364201N  1063259W
+5113591:  Tierra Amarilla  NM  364201N  1063259W
+6117254:  Tierra Amarilla Historical Marker  NM  364201N  1063259W
+6119531:  Fort Lowell Historical Marker  NM  364201N  1063259W
+6212975:  Tierra Amarilla Weather Station  NM  364201N  1063259W
+6360167:  La Clinica Del Pueblo De Rio Arriba, Inc.  NM  364201N  1063259W
+6386937:  Tierra Amarilla Elementary School  NM  364201N  1063259W
+6387089:  Tierra Amarilla Middle School  NM  364201N  1063259W
+6387237:  Escallante High School  NM  364201N  1063259W
+6590422:  Tierra Amarilla Historic District  NM  364201N  1063259W
+6593537:  Tierra Amarilla Community Ditch  NM  364201N  1063259W
+6888038:  Tierra Amarilla Post Office  NM  364201N  1063259W
+5462030:  Water Well 2  NM  364205N  1063322W
+6590273:  Rio Arriba County Courthouse  NM  364200N  1063259W
+--------------------------------------------------------------------------------
+Command 15: what_is_in	-c	351018N	1034330W	15	15
+
+40 features were found in (351018N +/- 15, 1034330W +/- 15)
+--------------------------------------------------------------------------------
+Command 16: what_is_in	351018N	1034330W	15	15
+
+   The following 40 features were found in (351018N +/- 15, 1034330W +/- 15)
+582342:  Granger School  NM  351013N  1034341W
+2187260:  Tucumcari Area vocational School  NM  351018N  1034330W
+2235841:  First Baptist Church  NM  351018N  1034330W
+2235967:  First Christian Church  NM  351018N  1034330W
+2236095:  First Presbyterian Church  NM  351018N  1034330W
+2237607:  Full Gospel Grace Tabernacle  NM  351018N  1034330W
+2237741:  First Spanish Baptist Church  NM  351018N  1034330W
+2237875:  First Assembly of God Church  NM  351018N  1034330W
+2249040:  Church of God  NM  351018N  1034330W
+2254942:  The Church of Jesus Christ of Latter Day Saints  NM  351018N  1034330W
+2296846:  Temple Baptist  NM  351018N  1034330W
+2296966:  Trinity Baptist Church  NM  351018N  1034330W
+2297094:  Primitive Baptist Church  NM  351018N  1034330W
+2297224:  Bethel Tabernacle  NM  351018N  1034330W
+2298962:  Church of the Nazarene  NM  351018N  1034330W
+2299090:  Church of Christ Scientist  NM  351018N  1034330W
+2299222:  Church of Christ  NM  351018N  1034330W
+2303408:  Saint Michael Episcopal Church  NM  351018N  1034330W
+2305117:  Center Saint United Methodist Church  NM  351018N  1034330W
+2305259:  Mount Calvary Baptist Church  NM  351018N  1034330W
+2333331:  Seventh Day Adventist Church  NM  351018N  1034330W
+2333465:  Saint Annes Catholic Church  NM  351018N  1034330W
+3993703:  Tucumcari High School  NM  351018N  1034330W
+4150618:  Tucumcari  NM  351018N  1034330W
+4667008:  United Pentecostal Church  NM  351018N  1034330W
+4669414:  Kingdom Hall  NM  351018N  1034330W
+4685821:  Christian Science Services Church  NM  351018N  1034330W
+4692138:  First Church of the Nazarene  NM  351018N  1034330W
+4810079:  Rayo Del Luz Baptist Church  NM  351018N  1034330W
+5818212:  Rural Bookmobile East Library  NM  351018N  1034330W
+5834107:  Tucumcari Area Vocational School Library  NM  351018N  1034330W
+5842886:  Tucumcari Historical Research Institute  NM  351018N  1034330W
+6206442:  Tucumcari Historical Marker  NM  351018N  1034330W
+6297369:  Baca-Goodman House Historic Site  NM  351018N  1034330W
+6376428:  Temple Baptist Academy  NM  351018N  1034330W
+6400024:  Tucumcari Junior High School  NM  351018N  1034330W
+6408201:  Rock Island-Southern Pacific Passenger Depot Historic Site  NM  351018N  1034330W
+6415483:  Quay County Courthouse Historic Site  NM  351018N  1034330W
+6814402:  Tucumcari Post Office  NM  351018N  1034330W
+6815912:  Douglas Post Office (historical)  NM  351018N  1034328W
+--------------------------------------------------------------------------------
+Command 17: what_is_in	354929N	1055845W	30	30
+
+   The following 4 features were found in (354929N +/- 30, 1055845W +/- 30)
+2556144:  Camel Rock  NM  354929N  1055845W
+4975223:  Water Well 2  NM  354930N  1055854W
+5350749:  Camel Rock 1 Water Well  NM  354940N  1055850W
+7487103:  Camel Rock Casino  NM  354918N  1055825W
+--------------------------------------------------------------------------------
+Command 18: what_is_in	-l	354929N	1055845W	30	30
+
+   The following 4 features were found in (354929N +/- 30, 1055845W +/- 30)
+  Feature ID   : 904308
+  Feature Name : Camel Rock
+  Feature Cat  : Pillar
+  State        : NM
+  County       : Santa Fe
+  Latitude     : 354929N
+  Longitude    : 1055845W
+  Elev in ft   : 6325
+  USGS Quad    : Tesuque
+  Date created : 11/13/1980
+
+  Feature ID   : 922593
+  Feature Name : Water Well 2
+  Feature Cat  : Well
+  State        : NM
+  County       : Santa Fe
+  Latitude     : 354930N
+  Longitude    : 1055854W
+  Elev in ft   : 6263
+  USGS Quad    : Tesuque
+  Date created : 09/01/1993
+
+  Feature ID   : 925587
+  Feature Name : Camel Rock 1 Water Well
+  Feature Cat  : Well
+  State        : NM
+  County       : Santa Fe
+  Latitude     : 354940N
+  Longitude    : 1055850W
+  Elev in ft   : 6283
+  USGS Quad    : Tesuque
+  Date created : 03/01/1994
+
+  Feature ID   : 2628400
+  Feature Name : Camel Rock Casino
+  Feature Cat  : Building
+  State        : NM
+  County       : Santa Fe
+  Latitude     : 354918N
+  Longitude    : 1055825W
+  Elev in ft   : 6342
+  USGS Quad    : Tesuque
+  Date created : 05/19/2010
+
+--------------------------------------------------------------------------------
+;
+; Let's check the pool again; we should agree on the top four, although they
+; could be in a different order:
+Command 19: debug	pool
+
+MRU
+ 7487103:  2628400|Camel Rock Casino|Building|NM|35|Santa Fe|049|354918N|1055825W|35.8216667|-105.9736111|||||1933|6342|Tesuque|05/19/2010|
+ 5350749:  925587|Camel Rock 1 Water Well|Well|NM|35|Santa Fe|049|354940N|1055850W|35.8278049|-105.9805778|||||1915|6283|Tesuque|03/01/1994|
+ 4975223:  922593|Water Well 2|Well|NM|35|Santa Fe|049|354930N|1055854W|35.8250272|-105.9816889|||||1909|6263|Tesuque|09/01/1993|
+ 2556144:  904308|Camel Rock|Pillar|NM|35|Santa Fe|049|354929N|1055845W|35.8247494|-105.9791889|||||1928|6325|Tesuque|11/13/1980|
+ 6815912:  937548|Douglas Post Office (historical)|Post Office|NM|35|Quay|037|351018N|1034328W|35.1716667|-103.7244444|||||1247|4091|Tucumcari|08/01/1993|05/12/2010
+ 6814402:  937537|Tucumcari Post Office|Post Office|NM|35|Quay|037|351018N|1034330W|35.171723|-103.7249662|||||1247|4091|Tucumcari|08/01/1993|
+ 6415483:  934351|Quay County Courthouse Historic Site|Building|NM|35|Quay|037|351018N|1034330W|35.171723|-103.7249662|||||1247|4091|Tucumcari|09/01/1994|
+ 6408201:  934301|Rock Island-Southern Pacific Passenger Depot Historic Site|Building|NM|35|Quay|037|351018N|1034330W|35.171723|-103.7249662|||||1247|4091|Tucumcari|09/01/1994|
+ 6400024:  934239|Tucumcari Junior High School|School|NM|35|Quay|037|351018N|1034330W|35.171723|-103.7249662|||||1247|4091|Tucumcari|09/01/1992|
+ 6376428:  934056|Temple Baptist Academy|School|NM|35|Quay|037|351018N|1034330W|35.171723|-103.7249662|||||1247|4091|Tucumcari|09/01/1992|
+LRU
+--------------------------------------------------------------------------------
+;
+; Exit
+Command 20: quit	
+
+Terminating execution of commands.
+End time: Thu, 16 Apr 2015 17:30:09
+--------------------------------------------------------------------------------

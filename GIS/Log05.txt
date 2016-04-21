@@ -1,0 +1,242 @@
+GIS Program - Dong Nan(nandong@vt.edu)
+
+dbFile:    db.txt
+script:    Script05.txt
+log:       Log05.txt
+Start time: Wed, 15 Apr 2015 21:39:10
+Quadtree children are printed in the order SW  SE  NE  NW
+--------------------------------------------------------------------------------
+; Script 5
+;
+; Test of "extreme" region searches with a larger database file.
+;
+; Specify boundaries of coordinate space:
+world	0804500W	0800000W	370000N	374500N
+
+Latitude/longitude values in index entries are shown as signed integers, in total seconds.
+
+World boundaries are set to:
+              135900
+   -290700                -288000
+              133200
+--------------------------------------------------------------------------------
+;
+; Import a smallish DB file:
+Command 1: import	VA_Montgomery.txt
+
+Imported Features by name: 733
+Longest probe sequence:    17
+Imported Locations:        752
+--------------------------------------------------------------------------------
+;
+; Check the location and name/state indices if you dare:
+;debug	quad
+;debug	hash
+;
+; And a few region searches:
+Command 2: what_is_in	370359N	0802626W	10	10
+
+   The following 2 features were found in (370359N +/- 10, 0802626W +/- 10)
+12722:  Riner  VA  370359N  0802626W
+78819:  Riner Historic District  VA  370350N  0802625W
+--------------------------------------------------------------------------------
+Command 3: what_is_in	370359N	0802626W	30	30
+
+   The following 6 features were found in (370359N +/- 30, 0802626W +/- 30)
+101691:  Auburn Elementary School  VA  370341N  0802645W
+12722:  Riner  VA  370359N  0802626W
+265:  Auburn High School  VA  370343N  0802634W
+78682:  Auburn Middle School  VA  370347N  0802632W
+78819:  Riner Historic District  VA  370350N  0802625W
+104373:  Riner Census Designated Place  VA  370346N  0802622W
+--------------------------------------------------------------------------------
+Command 4: what_is_in	370930N	0801859W	10	10
+
+   The following 2 features were found in (370930N +/- 10, 0801859W +/- 10)
+17443:  Montgomery  VA  370923N  0801908W
+47615:  Big Tunnel  VA  370930N  0801859W
+--------------------------------------------------------------------------------
+Command 5: what_is_in	370930N	0801859W	30	30
+
+   The following 5 features were found in (370930N +/- 30, 0801859W +/- 30)
+17443:  Montgomery  VA  370923N  0801908W
+5276:  Den Hill Cemetery  VA  370920N  0801844W
+10676:  Mount Calvary Church  VA  370919N  0801848W
+47615:  Big Tunnel  VA  370930N  0801859W
+55765:  Den Hill  VA  370920N  0801847W
+--------------------------------------------------------------------------------
+Command 6: what_is_in	371347N	0802514W	5	5
+
+   The following 14 features were found in (371347N +/- 5, 0802514W +/- 5)
+67006:  McBryde Hall  VA  371349N  0802519W
+58561:  Femoyer Hall  VA  371352N  0802517W
+92754:  Robert Femoyer Hall  VA  371352N  0802517W
+66868:  Major Williams Dormitory  VA  371351N  0802515W
+98990:  Major Lloyd W Williams Hall  VA  371352N  0802516W
+93317:  Torgersen Hall  VA  371347N  0802514W
+93626:  War Memorial Chapel  VA  371343N  0802515W
+71827:  Newman Library  VA  371344N  0802510W
+64863:  Lane Hall  VA  371351N  0802511W
+94855:  Arts and Science Administration Building  VA  371352N  0802513W
+98020:  James H Lane Hall  VA  371351N  0802512W
+49514:  Brodie Hall  VA  371348N  0802512W
+93907:  William H "Bosco" Rasche Hall  VA  371350N  0802509W
+78022:  Rasche Hall  VA  371351N  0802509W
+--------------------------------------------------------------------------------
+Command 7: what_is_in	371347N	0802514W	10	10
+
+   The following 39 features were found in (371347N +/- 10, 0802514W +/- 10)
+93055:  Roy Holden Hall  VA  371340N  0802521W
+60465:  Holden Hall  VA  371347N  0802524W
+74430:  Patton Hall  VA  371345N  0802520W
+94051:  William Patton Hall  VA  371345N  0802521W
+77895:  Randolph Hall  VA  371351N  0802524W
+98716:  Lingan Randolph Hall  VA  371350N  0802524W
+67006:  McBryde Hall  VA  371349N  0802519W
+72224:  Norris Hall  VA  371348N  0802521W
+92498:  Price House  VA  371352N  0802521W
+86337:  Thomas Hall  VA  371354N  0802515W
+94710:  Art and Design Learning Center  VA  371354N  0802515W
+99657:  Military Building  VA  371354N  0802518W
+68615:  Monteith Hall  VA  371355N  0802513W
+81044:  Shanks Hall  VA  371354N  0802512W
+97229:  Herbert J Thomas Hall  VA  371356N  0802513W
+98147:  Jimmie Monteith Junior Hall  VA  371354N  0802511W
+58561:  Femoyer Hall  VA  371352N  0802517W
+92754:  Robert Femoyer Hall  VA  371352N  0802517W
+100074:  Old Security Building  VA  371353N  0802518W
+66868:  Major Williams Dormitory  VA  371351N  0802515W
+98990:  Major Lloyd W Williams Hall  VA  371352N  0802516W
+93317:  Torgersen Hall  VA  371347N  0802514W
+93626:  War Memorial Chapel  VA  371343N  0802515W
+71827:  Newman Library  VA  371344N  0802510W
+64863:  Lane Hall  VA  371351N  0802511W
+94855:  Arts and Science Administration Building  VA  371352N  0802513W
+98020:  James H Lane Hall  VA  371351N  0802512W
+49514:  Brodie Hall  VA  371348N  0802512W
+93907:  William H "Bosco" Rasche Hall  VA  371350N  0802509W
+78022:  Rasche Hall  VA  371351N  0802509W
+84421:  Squires Hall  VA  371346N  0802506W
+98289:  John Houston Squires Student Center  VA  371346N  0802506W
+82119:  Shultz Hall  VA  371354N  0802507W
+97627:  J H Shultz Hall  VA  371354N  0802507W
+57525:  Eggleston Hall  VA  371338N  0802513W
+56411:  Donaldson Brown Continuing Education Center  VA  371342N  0802504W
+94437:  Alumni Hall-Virginia Tech  VA  371342N  0802505W
+95955:  Donaldson Brown Hotel and Conference Center  VA  371341N  0802504W
+95266:  Charles Vawter Senior Hall  VA  371337N  0802504W
+--------------------------------------------------------------------------------
+;
+; And one that extends outside the region (that IS fair):
+Command 8: what_is_in	370157N	0802908W	240	60
+
+   The following 8 features were found in (370157N +/- 240, 0802908W +/- 60)
+1068:  Bethany Church  VA  370048N  0802843W
+10805:  Mount Jackson Church  VA  370037N  0802851W
+51653:  Chestnut Ridge School (historical)  VA  370047N  0802844W
+3130:  Calfee Knob  VA  370157N  0802908W
+13973:  Sidney Church  VA  370144N  0802815W
+6462:  Fairview Church  VA  370300N  0802953W
+51795:  Childress School (historical)  VA  370342N  0802954W
+58165:  Fairview  VA  370302N  0802951W
+--------------------------------------------------------------------------------
+;
+; And one really small one:
+Command 9: what_is_in	371347N	0802514W	1	1
+
+   The following 1 features were found in (371347N +/- 1, 0802514W +/- 1)
+93317:  Torgersen Hall  VA  371347N  0802514W
+--------------------------------------------------------------------------------
+;
+; And two really skinny ones, one East-West and one North-South:
+Command 10: what_is_in	371347N	0802514W	2	360
+
+   The following 25 features were found in (371347N +/- 2, 0802514W +/- 360)
+21838:  Fairview Church  VA  371349N  0802943W
+29656:  Poff Hollow  VA  371349N  0803003W
+30939:  Shaffer Hollow  VA  371345N  0802957W
+58290:  Fairview School (historical)  VA  371349N  0802943W
+100672:  Town of Blacksburg  VA  371348N  0802540W
+95680:  Clinton Cowgill Hall  VA  371347N  0802530W
+60723:  Hancock Hall  VA  371349N  0802526W
+55241:  Cowgil Hall  VA  371347N  0802529W
+95010:  Burchard Hall  VA  371346N  0802529W
+33387:  Virginia Polytechnic Institute and State University  VA  371345N  0802526W
+60465:  Holden Hall  VA  371347N  0802524W
+74430:  Patton Hall  VA  371345N  0802520W
+94051:  William Patton Hall  VA  371345N  0802521W
+67006:  McBryde Hall  VA  371349N  0802519W
+72224:  Norris Hall  VA  371348N  0802521W
+93317:  Torgersen Hall  VA  371347N  0802514W
+49514:  Brodie Hall  VA  371348N  0802512W
+84421:  Squires Hall  VA  371346N  0802506W
+98289:  John Houston Squires Student Center  VA  371346N  0802506W
+60985:  Henderson Student Health Service Building  VA  371349N  0802501W
+41209:  Blacksburg  VA  371346N  0802450W
+48298:  Blacksburg Post Office  VA  371348N  0802452W
+49103:  Blacksburg United Methodist Church  VA  371347N  0802445W
+47070:  Berryfield  VA  371346N  0802434W
+64333:  Knob Hill  VA  371348N  0802355W
+--------------------------------------------------------------------------------
+Command 11: what_is_in	371347N	0802514W	360	2
+
+   The following 22 features were found in (371347N +/- 360, 0802514W +/- 2)
+31101:  Shaffer Memorial Cemetery  VA  370747N  0802515W
+86337:  Thomas Hall  VA  371354N  0802515W
+94710:  Art and Design Learning Center  VA  371354N  0802515W
+68615:  Monteith Hall  VA  371355N  0802513W
+81044:  Shanks Hall  VA  371354N  0802512W
+97229:  Herbert J Thomas Hall  VA  371356N  0802513W
+66868:  Major Williams Dormitory  VA  371351N  0802515W
+98990:  Major Lloyd W Williams Hall  VA  371352N  0802516W
+93317:  Torgersen Hall  VA  371347N  0802514W
+93626:  War Memorial Chapel  VA  371343N  0802515W
+94855:  Arts and Science Administration Building  VA  371352N  0802513W
+98020:  James H Lane Hall  VA  371351N  0802512W
+49514:  Brodie Hall  VA  371348N  0802512W
+57525:  Eggleston Hall  VA  371338N  0802513W
+67401:  Memorial Gymnasium  VA  371334N  0802515W
+94309:  Al Payne Hall  VA  371333N  0802513W
+56283:  Dietrick Hall  VA  371328N  0802516W
+45715:  Ambler Johnston Hall  VA  371323N  0802516W
+97490:  J Ambler Johnston Hall  VA  371323N  0802516W
+92359:  Peddrew-Yates Residence Hall  VA  371330N  0802513W
+35213:  Blacksburg Ranger Station  VA  371634N  0802516W
+87556:  University Terrace  VA  371438N  0802515W
+--------------------------------------------------------------------------------
+;
+; And just to push the limits:
+Command 12: what_is_in	371002N	0802042W	10	60000
+
+   The following 23 features were found in (371002N +/- 10, 0802042W +/- 60000)
+42825:  Centerville  VA  371011N  0803218W
+103607:  Belview Census Designated Place  VA  371000N  0803035W
+29095:  Pine View Church  VA  371012N  0803000W
+38855:  Vicker Heights  VA  370954N  0802839W
+19038:  Belmont Church  VA  370953N  0802727W
+36565:  Rolling Hills  VA  370955N  0802730W
+46652:  Belmont Community Cemetery  VA  370954N  0802729W
+30311:  Roselawn Memorial Cemetery  VA  371007N  0802526W
+46793:  Belmont Estates  VA  371007N  0802629W
+50719:  Carma Heights  VA  370955N  0802613W
+71407:  New River Valley Mall Shopping Center  VA  370952N  0802529W
+36239:  Virginia Polytechnic Institute and State University Horticultural Research Area  VA  370958N  0802505W
+85928:  The Marketplace Shopping Center  VA  371002N  0802517W
+68743:  Montgomery County  VA  371000N  0802259W
+8687:  Iron Mine Hollow  VA  371002N  0802042W
+14253:  Slaughterpen Hollow  VA  371010N  0802035W
+39663:  Dee Cee Hill  VA  371003N  0801909W
+14094:  Skillet Hollow  VA  371007N  0801703W
+16656:  Wheeling Hollow  VA  370957N  0801741W
+9286:  Kirk Hollow  VA  370957N  0801515W
+40704:  Shawsville  VA  371006N  0801519W
+81170:  Shawsville Historic District  VA  371005N  0801522W
+14885:  Spring Branch  VA  370959N  0801415W
+--------------------------------------------------------------------------------
+;
+; Exit
+Command 13: quit	
+
+Terminating execution of commands.
+End time: Wed, 15 Apr 2015 21:39:10
+--------------------------------------------------------------------------------

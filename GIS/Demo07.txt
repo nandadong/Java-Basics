@@ -1,0 +1,116 @@
+GIS Program - Dong Nan(nandong@vt.edu)
+
+dbFile:    db.txt
+script:    DemoScript07.txt
+log:       Demo07.txt
+Start time: Tue, 21 Apr 2015 10:05:11
+Quadtree children are printed in the order SW  SE  NE  NW
+--------------------------------------------------------------------------------
+; Demo script 7
+;
+; Specify boundaries of coordinate space:
+world	1100000W	1020000W	303000N	383000N
+
+Latitude/longitude values in index entries are shown as signed integers, in total seconds.
+
+World boundaries are set to:
+              138600
+   -396000                -367200
+              109800
+--------------------------------------------------------------------------------
+;
+; Import a sizeable number of records;
+;   This may take some time... allow at least a few minutes for the
+;   student's solution to complete this one.
+Command 1: import	NM_All.txt
+
+Imported Features by name: 48417
+Longest probe sequence:    32
+Imported Locations:        48417
+--------------------------------------------------------------------------------
+;
+; Uncomment if you REALLY want to take a look at the indices:
+;debug	quad
+;debug	hash
+;
+; Perform some name/state searches:
+Command 2: what_is	Nester Draw	NM
+
+7305169:  Catron  340834N  1080214W
+--------------------------------------------------------------------------------
+Command 3: what_is	Screaming Left Hand Turn	NM
+
+5291769:  Taos  362103N  1064025W
+--------------------------------------------------------------------------------
+Command 4: what_is	Window Rock	NM
+
+7492122:  Rio Arriba  360735N  1061308W
+--------------------------------------------------------------------------------
+Command 5: what_is	Buena Vista	NM
+
+6222496:  Socorro  Unknown  Unknown
+--------------------------------------------------------------------------------
+;
+; Now do some location searches:
+Command 6: what_is_at	363957N	1054049W
+
+   The following features were found at 363957N   1054049W
+3074122:  Little Arsenic Springs Campground  Taos  NM
+--------------------------------------------------------------------------------
+Command 7: what_is_at	351018N	1034328W
+
+   The following features were found at 351018N   1034328W
+6815912:  Douglas Post Office (historical)  Quay  NM
+--------------------------------------------------------------------------------
+Command 8: what_is_at	362846N	1085222W
+
+   The following features were found at 362846N   1085222W
+1646616:  Tse-clani-to Wash  San Juan  NM
+--------------------------------------------------------------------------------
+Command 9: what_is_at	334236N	1055604W
+
+   The following features were found at 334236N   1055604W
+5849131:  The Malpais  Lincoln  NM
+--------------------------------------------------------------------------------
+;
+; And some region searches:
+Command 10: what_is_in	362846N	1085220W	120	120
+
+   The following 6 features were found in (362846N +/- 120, 1085220W +/- 120)
+5546507:  T26R19s5 Water Well  NM  363043N  1085300W
+5547327:  12T-570 Water Well  NM  362749N  1085406W
+1646616:  Tse-clani-to Wash  NM  362846N  1085222W
+4766171:  12M-39 Spring  NM  362851N  1085147W
+5521134:  12T-338 Water Well  NM  362900N  1085023W
+7430729:  Sanostee Chapter  NM  362652N  1085043W
+--------------------------------------------------------------------------------
+Command 11: what_is_in	333859N	1062731W	120	120
+
+   The following 5 features were found in (333859N +/- 120, 1062731W +/- 120)
+876140:  McDonald Ranch  NM  333859N  1062733W
+2339562:  Trinity Site  NM  334038N  1062831W
+6193843:  Trinity Site Historical Marker  NM  334038N  1062831W
+4666255:  Millars Watch Site  NM  334000N  1062611W
+1303509:  Smith Tank  NM  333711N  1062545W
+--------------------------------------------------------------------------------
+Command 12: what_is_in	345326N	1073457W	60	60
+
+   The following 10 features were found in (345326N +/- 60, 1073457W +/- 60)
+49477:  Acoma Village  NM  345355N  1073513W
+5813887:  Acoma Community Library Resource Center  NM  345355N  1073513W
+1807333:  Dinosaur Rock  NM  345353N  1073520W
+5294448:  Sky City Community  NM  345347N  1073454W
+5731206:  Acoma Pueblo  NM  345347N  1073454W
+5840013:  Acoma Museum  NM  345347N  1073454W
+6116645:  Pueblo of Acoma Historical Marker  NM  345347N  1073454W
+6191846:  Cebolleta Historical Marker  NM  345347N  1073454W
+6524267:  San Estevan de Acoma Mission Church Historic Site  NM  345347N  1073452W
+1803166:  Acoma Rock  NM  345326N  1073459W
+--------------------------------------------------------------------------------
+;
+; Exit:
+Command 13: quit	
+
+Terminating execution of commands.
+End time: Tue, 21 Apr 2015 10:05:21
+--------------------------------------------------------------------------------

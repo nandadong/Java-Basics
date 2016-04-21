@@ -1,0 +1,69 @@
+GIS Program - Dong Nan(nandong@vt.edu)
+
+dbFile:    db.txt
+script:    DemoScript05.txt
+log:       Demo05.txt
+Start time: Tue, 21 Apr 2015 10:02:05
+Quadtree children are printed in the order SW  SE  NE  NW
+--------------------------------------------------------------------------------
+; Demo script 5
+;
+; Specify boundaries of coordinate space:
+world	1090000W	1050000W	370000N	410000N
+
+Latitude/longitude values in index entries are shown as signed integers, in total seconds.
+
+World boundaries are set to:
+              147600
+   -392400                -378000
+              133200
+--------------------------------------------------------------------------------
+;
+; Import a sizeable number of records:
+Command 1: import	CO_Ouray.txt
+
+Imported Features by name: 537
+Longest probe sequence:    10
+Imported Locations:        537
+--------------------------------------------------------------------------------
+;
+; Take a look at the indices, if you like:
+;debug	quad
+;debug	hash
+;
+; Perform a couple of some no-match searches by name/state:
+Command 2: what_is	Not There Summit	CO
+
+No records match Not There Summit and CO
+--------------------------------------------------------------------------------
+Command 3: what_is	Sniffles Creek	CO
+
+No records match Sniffles Creek and CO
+--------------------------------------------------------------------------------
+;
+; Perform a couple of some no-match searches by location:
+Command 4: what_is_at	390000N	1070000W
+
+   Nothing was found at 390000N   1070000W
+--------------------------------------------------------------------------------
+Command 5: what_is_at	370000N	1090000W
+
+   Nothing was found at 370000N   1090000W
+--------------------------------------------------------------------------------
+;
+; Perform a couple of some no-match region searches:
+Command 6: what_is_in	390000N	1070000W	15	15
+
+   Nothing was found in (390000N +/- 15, 1070000W +/- 15)
+--------------------------------------------------------------------------------
+Command 7: what_is_in	405900N	1085900W	30	120
+
+   Nothing was found in (405900N +/- 30, 1085900W +/- 120)
+--------------------------------------------------------------------------------
+;
+; Exit:
+Command 8: quit	
+
+Terminating execution of commands.
+End time: Tue, 21 Apr 2015 10:02:05
+--------------------------------------------------------------------------------
