@@ -1,7 +1,7 @@
 import java.util.*;
 public class ReverseVowels {
 	public static void main(String[] args) {
-		String s = "leetcode";
+		String s = "race car";
 		System.out.print(reveseVowels(s) + "\n");
 	}
 	public static String reveseVowels(String s) {
@@ -16,22 +16,25 @@ public class ReverseVowels {
 		vowels.add('I');
 		vowels.add('O');
 		vowels.add('U');
-		char[] charry = s.toCharArray();
-		int j = charry.length - 1;
-		for (int i = 0; i < charry.length; i++) {
-			if (vowels.contains(charry[i])) {
-				for (; j > i; j--) {
-					if (vowels.contains(charry[j])) {
-						char temp = charry[i];
-						charry[i] = charry[j];
-						charry[j] = temp;
-						j--;
-						break;
-					}
+		char[] ch = s.toCharArray();
+		int start = 0;
+		int end = ch.length - 1;
+		while (start < end) {
+			if (vowels.contains(ch[start]) && vowels.contains(ch[end])) {
+				char temp = ch[start];
+				ch[start] = ch[end];
+				ch[end] = temp;
+				start ++;
+				end --;
+			} else {
+				if (!vowels.contains(ch[start])) {
+					start ++;
+				}
+				if (!vowels.contains(ch[end])) {
+					end --;
 				}
 			}
 		}
-		String result = new String(charry);
-		return result;
+		return new String(ch);
 	}
 }
