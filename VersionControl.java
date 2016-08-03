@@ -10,8 +10,8 @@ public class VersionControl {
 			if (isBadVersion(mid)) end = mid;
 			else start = mid;
 		}
-		if (isBadVersion(start)) return start;
-		return end;
+		return isBadVersion(start) ? start : end;
+		
 	}
 	public static boolean isBadVersion(int version) {
 		if (version >= 4) {
